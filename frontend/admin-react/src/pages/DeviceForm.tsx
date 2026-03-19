@@ -53,7 +53,7 @@ const DeviceForm: React.FC = () => {
             } else {
                 setError('Device not found');
             }
-        } catch (err) {
+        } catch {
             setError('Failed to load device');
         }
     }

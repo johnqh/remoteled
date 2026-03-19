@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           setUser(JSON.parse(storedUser));
           // Optionally verify token is still valid
           await authApi.getCurrentUser();
-        } catch (error) {
+        } catch {
           // Token invalid, clear storage
           localStorage.removeItem('access_token');
           localStorage.removeItem('user');

@@ -23,7 +23,6 @@ import { DeviceModelForm } from '../components/forms/DeviceModelForm'
 import { LocationForm } from '../components/forms/LocationForm'
 import { ServiceTypeForm } from '../components/forms/ServiceTypeForm'
 import { exportToCSV } from '../utils/format'
-import { AUTO_REFRESH_INTERVAL } from '../config/constants'
 import { servicesApi } from '../api'
 
 const NAV_ITEMS = [
@@ -34,7 +33,7 @@ const NAV_ITEMS = [
   { id: 'logs', label: 'Logs', icon: '📜' }
 ] as const
 
-type NavItemId = typeof NAV_ITEMS[number]['id']
+type NavItemId = (typeof NAV_ITEMS)[number]['id']
 
 type FeedbackMessage = {
   type: 'success' | 'error'
@@ -53,7 +52,7 @@ export const Dashboard = () => {
     createDevice,
     updateDevice,
     deleteDevice,
-    error: devicesError
+    error: _devicesError
   } = useDevices(false) // Disable auto-refresh to prevent flashing
 
   const {
@@ -63,36 +62,36 @@ export const Dashboard = () => {
     updateService,
     deleteService,
     fetchServices,
-    error: servicesError
+    error: _servicesError
   } = useServices(false) // Disable auto-refresh to prevent flashing
 
   const deviceModelsHook = useDeviceModels()
   const {
     models = [],
-    loading: modelsLoading = false,
+    loading: _modelsLoading = false,
     createModel = async () => ({} as any),
     updateModel = async () => ({} as any),
     deleteModel = async () => {},
-    error: modelsError = null,
+    error: _modelsError = null,
     fetchModels = async () => {}
   } = deviceModelsHook || {}
 
   const locationsHook = useLocations()
   const {
     locations = [],
-    loading: locationsLoading = false,
+    loading: _locationsLoading = false,
     createLocation = async () => ({} as any),
     updateLocation = async () => ({} as any),
     deleteLocation = async () => {},
-    error: locationsError = null,
+    error: _locationsError = null,
     fetchLocations = async () => {}
   } = locationsHook || {}
 
   const serviceTypesHook = useServiceTypes()
   const {
     serviceTypes = [],
-    loading: serviceTypesLoading = false,
-    error: serviceTypesError = null,
+    loading: _serviceTypesLoading = false,
+    error: _serviceTypesError = null,
     createServiceType = async () => ({} as any),
     updateServiceType = async () => ({} as any),
     deleteServiceType = async () => {}
@@ -102,7 +101,7 @@ export const Dashboard = () => {
     stats,
     orders,
     loading: statsLoading,
-    error: statsError
+    error: _statsError
   } = useStats(false) // Disable auto-refresh to prevent flashing
 
   const {
@@ -589,13 +588,7 @@ export const Dashboard = () => {
       <DashboardLayout
         title="RemoteLED Admin"
         subtitle="Control Center"
-        navItems={[
-          { id: 'overview', label: 'Overview', icon: '📊' },
-          { id: 'devices', label: 'Devices', icon: '💡' },
-          { id: 'services', label: 'Services', icon: '⚙️' },
-          { id: 'orders', label: 'Orders', icon: '📦' },
-          { id: 'logs', label: 'Logs', icon: '📜' }
-        ]}
+        navItems={[...NAV_ITEMS]}
         activeItem={activeView}
         onSelect={setActiveView}
         headerSlot={<Header />}

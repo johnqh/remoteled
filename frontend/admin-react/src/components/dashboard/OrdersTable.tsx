@@ -66,7 +66,7 @@ export const OrdersTable = ({ orders: initialOrders, onExportCSV, onRefresh }: O
     const maxVisible = 5
     
     let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2))
-    let endPage = Math.min(totalPages, startPage + maxVisible - 1)
+    const endPage = Math.min(totalPages, startPage + maxVisible - 1)
     
     if (endPage - startPage < maxVisible - 1) {
       startPage = Math.max(1, endPage - maxVisible + 1)

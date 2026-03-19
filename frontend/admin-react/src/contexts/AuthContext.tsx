@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const parsedUser = JSON.parse(storedUser)
         setToken(storedToken)
         setUser(parsedUser)
-      } catch (e) {
+      } catch {
         // Invalid stored data, clear it
         localStorage.removeItem(TOKEN_KEY)
         localStorage.removeItem(USER_KEY)

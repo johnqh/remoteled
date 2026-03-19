@@ -34,7 +34,7 @@ const ServiceForm: React.FC = () => {
             const response = await fetch(`${API_BASE_URL}/admin/devices/all`);
             const data = await response.json();
             setDevices(data.filter((d: any) => d.status === 'ACTIVE'));
-        } catch (err) {
+        } catch {
             setError('Failed to load devices');
         }
     }
