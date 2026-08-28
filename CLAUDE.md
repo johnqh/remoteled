@@ -1,5 +1,10 @@
 # RemoteLED
 
+> **Git policy — never auto-commit or auto-push.** Leave your work in the working tree.
+> Run `git commit`, `git push`, `gh pr create`, or `scripts/push_all.sh` **only when the user
+> explicitly asks in that turn**. Approval for an earlier change does not carry forward, and
+> finishing a task is not permission to commit it.
+
 QR-to-device payment activation system. Customers scan a QR code on a Raspberry Pi kiosk, select a service (laundry, vending, air compressor), pay via Stripe, and the Pi activates a GPIO relay for the authorized duration. The backend signs ECDSA authorizations; the Android app relays them to the Pi over BLE.
 
 ## Monorepo Structure
@@ -164,3 +169,7 @@ cp backend/.env.example backend/.env       # Edit with your Stripe keys if neede
 cd backend && uv run --no-project uvicorn app.main:app --reload --host 0.0.0.0 --port 9999
 cd frontend/admin-react && npm run dev
 ```
+
+## Git Workflow
+
+- Do not use feature branches for code changes. Always stay on the current branch.
