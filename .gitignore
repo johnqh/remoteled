@@ -32,7 +32,8 @@ android/RemoteLedBLE/app/build/
 Thumbs.db
 
 # Firebase
-firebase-adminsdk-*.jsonbackend/.env
+firebase-adminsdk-*.json
+backend/.env
 
 # Claude Code local settings
 .claude/settings.local.json
